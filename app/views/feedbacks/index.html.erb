@@ -1,0 +1,35 @@
+<div class="container mt-5">
+  <!-- Feedbacks Section -->
+  <div class="card shadow-lg mb-4">
+    <div class="card-header bg-primary text-white">
+      <h4 class="card-title">Course Feedbacks For <%= current_user.name %> </h4>
+    </div>
+    <div class="card-body">
+      <% if @feedbacks.any? %>
+        <ul class="list-group">
+          <% @feedbacks.each do |feedback| %>
+            <li class="list-group-item d-flex justify-content-between align-items-center mb-3 border rounded">
+              <div>
+                <!-- Rating Section with background color depending on the rating -->
+                <strong>Rating:</strong>
+                <span class="badge 
+                            <%= 'bg-success' if feedback.rating >= 4 %>
+                            <%= 'bg-warning' if feedback.rating == 3 %>
+                            <%= 'bg-danger' if feedback.rating < 3 %>">
+                            <%= feedback.rating %>/5
+                </span>
+                <br>
+                <strong>Detail:</strong> <%= feedback.detail %>
+              </div>
+              <div class="text-muted">
+                <small><strong>Given By:</strong> <%= feedback.user_given.first_name %></small>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p class="text-center text-muted">No feedbacks yet for this course.</p>
+      <% end %>
+    </div>
+  </div>
+</div>

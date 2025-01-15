@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  detail: MyText
+  rating: 1
+  user_given: one
+  user_received: one
+  course: one
+
+two:
+  detail: MyText
+  rating: 1
+  user_given: two
+  user_received: two
+  course: two

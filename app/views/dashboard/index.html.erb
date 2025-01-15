@@ -1,0 +1,51 @@
+<div class="container mt-5">
+  <!-- Header Section -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="text-primary">Teqpeers</h1>
+    <div>
+      <!-- User Info or Any Other Details on the Right Side -->
+      <span class="badge bg-secondary">Welcome, <%= current_user.first_name %>!</span>
+    </div>
+  </div>
+
+  <!-- Dashboard Content Section -->
+  <div class="row">
+    <!-- Left Column for Dashboard Information -->
+    <div class="col-md-8">
+      <div class="card shadow mb-4">
+        <div class="card-header">
+          <h4 class="card-title">Dashboard Overview</h4>
+        </div>
+        <div class="card-body">
+          
+          <!-- Displaying Courses List -->
+          <h5 class="mt-4">Your Courses</h5>
+          <% if current_user.courses.any? %>
+            <ul class="list-group">
+              <% current_user.courses.each do |course| %>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <%= link_to course.name, course_feedbacks_path(course_id: course.id), class: 'text-decoration-none' %> <!-- Corrected link -->
+                  <span class="badge bg-info rounded-pill">Description: <%= course.description %></span>
+                </li>
+              <% end %>
+            </ul>
+          <% else %>
+            <p>You are not enrolled in any courses yet.</p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column for Logout -->
+    <div class="col-md-4">
+      <div class="card shadow mb-4">
+        <div class="card-header">
+          <h4 class="card-title">User Actions</h4>
+        </div>
+        <div class="card-body text-center">
+          <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to log out?' } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
