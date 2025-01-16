@@ -10,15 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_15_103200) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_16_131046) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "attendances", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.boolean "status"
+    t.date "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_attendances_on_user_id"
+  end
 
   create_table "courses", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "daily_statuses", force: :cascade do |t|
+    t.text "content"
+    t.date "date"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_daily_statuses_on_user_id"
   end
 
   create_table "enrollments", force: :cascade do |t|
@@ -33,14 +51,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_15_103200) do
   create_table "feedbacks", force: :cascade do |t|
     t.text "detail"
     t.integer "rating"
-    t.bigint "user_given_id", null: false
-    t.bigint "user_received_id", null: false
+    t.bigint "mentor_id", null: false
+    t.bigint "trainee_id", null: false
     t.bigint "course_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["course_id"], name: "index_feedbacks_on_course_id"
-    t.index ["user_given_id"], name: "index_feedbacks_on_user_given_id"
-    t.index ["user_received_id"], name: "index_feedbacks_on_user_received_id"
+    t.index ["mentor_id"], name: "index_feedbacks_on_mentor_id"
+    t.index ["trainee_id"], name: "index_feedbacks_on_trainee_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -49,7 +67,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_15_103200) do
     t.string "last_name"
     t.string "phone_number"
     t.string "address"
-    t.string "role", default: "", null: false
+    t.integer "role"
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -60,9 +78,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_15_103200) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "attendances", "users"
+  add_foreign_key "daily_statuses", "users"
   add_foreign_key "enrollments", "courses"
   add_foreign_key "enrollments", "users"
   add_foreign_key "feedbacks", "courses"
-  add_foreign_key "feedbacks", "users", column: "user_given_id"
-  add_foreign_key "feedbacks", "users", column: "user_received_id"
+  add_foreign_key "feedbacks", "users", column: "mentor_id"
+  add_foreign_key "feedbacks", "users", column: "trainee_id"
 end

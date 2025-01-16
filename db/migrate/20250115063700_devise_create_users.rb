@@ -9,7 +9,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[8.0]
       t.string :last_name
       t.string :phone_number
       t.string :address
-      t.string :role, null: false, default: ""
+      t.integer :role
       t.string :encrypted_password, null: false, default: ""
 
       ## Recoverable

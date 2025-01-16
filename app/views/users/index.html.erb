@@ -1,0 +1,37 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow mb-4">
+        <div class="card-header">
+          <h4 class="card-title">Mark Attendance of <%= Date.today.strftime("%B %d, %Y") %></h4>
+        </div>
+        <div class="card-body">
+          <% if @trainees.any? %>
+            <ul class="list-group">
+              <%= form_with url: mark_user_attendance_path, method: :post, local: true do |form| %>
+                <ul class="list-group">
+                  <% @trainees.each do |trainee| %>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                      <%= trainee.name %>
+                      <!-- Checkbox for Marking Attendance -->
+                     <div class="form-check">
+                        <%= form.check_box "attendance[#{trainee.id}]",
+                                          class: "form-check-input custom-checkbox",
+                                          id: "present_#{trainee.id}",
+                                          checked: Attendance.exists?(user_id: trainee.id, date: Date.today, status: true) %>
+                      </div>
+                    </li>
+                  <% end %>
+                </ul>
+
+                <%= form.submit "Save Attendance", class: "btn btn-primary mt-3" %>
+              <% end %>
+            </ul>
+          <% else %>
+            <p>No trainees found.</p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

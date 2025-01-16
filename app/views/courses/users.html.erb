@@ -1,0 +1,31 @@
+<div class="container mt-5">
+  <!-- Heading Section -->
+  <h1 class="text-center mb-4 text-primary">Users Enrolled in <%= @course.name %></h1>
+
+  <div class="row justify-content-center">
+    <!-- Column for Users List -->
+    <div class="col-md-8">
+      <% if @course_trainee.any? %>
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <ul class="list-group">
+              <% @course_trainee.each do |trainee| %>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <div>
+                    <h5 class="mb-1"><%= trainee.name %></h5>
+                    <p class="mb-0 text-muted"><%= trainee.email %></p>
+                  </div>
+                  <%= link_to 'Create Feedback', new_course_feedback_path(course_id: @course.id, user_id: trainee.id), class: 'btn btn-primary btn-sm ml-2' %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      <% else %>
+        <div class="alert alert-warning mt-4 text-center" role="alert">
+          No trainees are currently enrolled in this course.
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

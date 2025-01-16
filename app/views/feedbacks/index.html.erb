@@ -12,7 +12,7 @@
               <div>
                 <!-- Rating Section with background color depending on the rating -->
                 <strong>Rating:</strong>
-                <span class="badge 
+                <span class="badge
                             <%= 'bg-success' if feedback.rating >= 4 %>
                             <%= 'bg-warning' if feedback.rating == 3 %>
                             <%= 'bg-danger' if feedback.rating < 3 %>">
@@ -22,7 +22,7 @@
                 <strong>Detail:</strong> <%= feedback.detail %>
               </div>
               <div class="text-muted">
-                <small><strong>Given By:</strong> <%= feedback.user_given.first_name %></small>
+                <small><strong>Given By:</strong> <%= feedback.mentor.first_name %></small>
               </div>
             </li>
           <% end %>

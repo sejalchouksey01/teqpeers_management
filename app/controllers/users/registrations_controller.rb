@@ -17,7 +17,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     if @user.save
       sign_in(@user)
-      redirect_to dashboard_index_path, notice: 'Welcome! You have signed up successfully.'
+      redirect_to dashboard_path, notice: 'Welcome! You have signed up successfully.'
     else
       # If registration fails, render the sign-up page with errors
       render :new

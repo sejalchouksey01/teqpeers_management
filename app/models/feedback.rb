@@ -1,6 +1,6 @@
 class Feedback < ApplicationRecord
-  belongs_to :user_given, class_name: 'User', foreign_key: 'user_given_id'
-  belongs_to :user_received, class_name: 'User', foreign_key: 'user_received_id'
+  belongs_to :mentor, class_name: 'User', foreign_key: 'mentor_id'
+  belongs_to :trainee, class_name: 'User', foreign_key: 'trainee_id'
   belongs_to :course
 
   validates :detail, presence: true

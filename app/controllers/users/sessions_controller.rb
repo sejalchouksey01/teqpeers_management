@@ -8,7 +8,7 @@ class Users::SessionsController < Devise::SessionsController
   # GET /resource/sign_in
   def new
     if user_signed_in?
-      redirect_to dashboard_index_path , notice: "You are already signed in."
+      redirect_to dashboard_path , notice: "You are already signed in."
     else
       super
     end 
@@ -17,7 +17,7 @@ class Users::SessionsController < Devise::SessionsController
   # POST /resource/sign_in
   def create
     if user_signed_in?
-      redirect_to dashboard_index_path , notice: "You are already signed in."
+      redirect_to dashboard_path , notice: "You are already signed in."
     else
       super
     end 

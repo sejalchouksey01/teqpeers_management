@@ -1,3 +1,38 @@
 // @import "bootstrap";
 @import "~bootstrap/scss/bootstrap";
 @import url('https://fonts.googleapis.com/css?family=Merriweather:400,700');
+
+.custom-checkbox {
+  accent-color: #007bff;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #007bff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.custom-checkbox:checked {
+  background-color: #007bff;
+  border-color: #0056b3;
+}
+
+.custom-badge {
+  height: 40px; /* Set the height of the badge */
+  display: flex;
+  align-items: center; /* Vertically center the text */
+  justify-content: center; /* Horizontally center the text */
+  padding: 0 15px; /* Adjust padding for consistent width */
+  font-size: 16px; /* Set a consistent font size */
+  line-height: 1; /* Ensure the text is centered properly */
+}
+
+.custom-btn {
+  height: 40px; /* Set the height of the button */
+  width: 120px; /* Set the width to match the badge width */
+  display: flex;
+  align-items: center; /* Vertically center the text */
+  justify-content: center; /* Horizontally center the text */
+  padding: 0 15px; /* Same padding for consistent width */
+  font-size: 16px; /* Set a consistent font size */
+  line-height: 1; /* Ensure the text is centered properly */
+}

@@ -3,8 +3,8 @@ class CreateFeedbacks < ActiveRecord::Migration[8.0]
     create_table :feedbacks do |t|
       t.text :detail
       t.integer :rating
-      t.references :user_given, null: false, foreign_key: { to_table: :users }
-      t.references :user_received, null: false, foreign_key: { to_table: :users }
+      t.references :mentor, null: false, foreign_key: { to_table: :users }
+      t.references :trainee, null: false, foreign_key: { to_table: :users }
       t.references :course, null: false, foreign_key: true
 
       t.timestamps

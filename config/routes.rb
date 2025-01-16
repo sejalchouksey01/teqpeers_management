@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get "dashboard/index"
+  get "dashboard", to: 'dashboard#index'
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations'
@@ -15,7 +15,12 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root to: "home#index"
-  resources :courses do 
+  resources :courses do
     resources :feedbacks
   end
+  post 'users/mark_attendance', to: 'users#mark_attendance', as: 'mark_user_attendance'
+  get 'users', to: 'users#index'
+  get 'courses/:course_id/users', to: 'courses#users', as: 'course_users'
+  post 'save_daily_status', to: 'statuses#save_daily_status'
+
 end
