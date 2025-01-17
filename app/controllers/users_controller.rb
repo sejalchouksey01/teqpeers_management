@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   def index
     @trainees = User.trainee
+    render 'user_statuses' if params[:status] == "true"
   end
 
   def mark_attendance

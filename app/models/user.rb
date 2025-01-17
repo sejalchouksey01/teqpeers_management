@@ -18,7 +18,7 @@ class User < ApplicationRecord
 
   has_many :received_courses, through: :feedbacks_received, source: :course
   has_many :attendances
-  has_many :daily_statuses
+  has_many :statuses, class_name: 'DailyStatus', foreign_key: 'user_id'
   def name
     "#{first_name} #{last_name}"
   end

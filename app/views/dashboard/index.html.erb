@@ -21,9 +21,9 @@
               <% end %>
             </ul>
 
-            <div class="mt-4">
-              <h5>Mark Attendance for Trainees</h5>
-              <%= link_to 'Go to Trainees List', users_path, class: 'btn btn-primary mt-2' %>
+            <div class="d-flex mt-4">
+              <%= link_to 'Go to Trainees Attendance List', users_path, class: 'btn btn-primary me-2' %>
+              <%= link_to 'Go to Trainees Status', users_path(status: true), class: 'btn btn-primary' %>
             </div>
           <% elsif current_user.courses.any? %>
             <!-- Display the courses for the current user -->
@@ -43,25 +43,27 @@
     </div>
 
     <!-- Right Column for Daily Status Form -->
-    <div class="col-md-4">
-      <div class="card shadow mb-4">
-        <div class="card-header">
-          <h5 class="card-title">Daily Status</h5>
-        </div>
-        <div class="card-body">
-          <%= form_with url: save_daily_status_path, method: :post, local: true do |form| %>
-            <div class="mb-3">
-              <%= form.label :content, "Daily Status Content" %>
-              <%= form.text_area :content, class: "form-control", rows: 4, placeholder: "Enter your daily status here..." %>
-            </div>
-            <div class="mb-3">
-              <%= form.label :date, "Date" %>
-              <%= form.date_field :date, value: Date.today, class: "form-control" %>
-            </div>
-            <%= form.submit "Save Status", class: "btn btn-primary" %>
-          <% end %>
+    <% if current_user.role == "trainee" %>
+      <div class="col-md-4">
+        <div class="card shadow mb-4">
+          <div class="card-header">
+            <h5 class="card-title">Daily Status</h5>
+          </div>
+          <div class="card-body">
+            <%= form_with url: save_daily_status_path, method: :post, local: true do |form| %>
+              <div class="mb-3">
+                <%= form.label :content, "Daily Status Content" %>
+                <%= form.text_area :content, class: "form-control", rows: 4, placeholder: "Enter your daily status here..." %>
+              </div>
+              <div class="mb-3">
+                <%= form.label :date, "Date" %>
+                <%= form.date_field :date, value: Date.today, class: "form-control" %>
+              </div>
+              <%= form.submit "Save Status", class: "btn btn-primary" %>
+            <% end %>
+          </div>
         </div>
       </div>
-    </div>
+    <% end %>
   </div>
 </div>

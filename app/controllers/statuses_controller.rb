@@ -1,7 +1,11 @@
 class StatusesController < ApplicationController
+
+  def index
+    @user = User.find(params[:user_id]) # Assuming statuses are nested under users
+    @statuses = @user.statuses.order(date: :desc) 
+  end
+
   def save_daily_status
-    # Assuming user is logged in and can submit their daily status
-    binding.pry
     @status = current_user.statuses.new(status_params)
     if @status.save
       redirect_to dashboard_path, notice: "Your daily status has been saved."

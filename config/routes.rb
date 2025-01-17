@@ -22,5 +22,8 @@ Rails.application.routes.draw do
   get 'users', to: 'users#index'
   get 'courses/:course_id/users', to: 'courses#users', as: 'course_users'
   post 'save_daily_status', to: 'statuses#save_daily_status'
-
+  
+  resources :users, only: [:index] do
+    resources :statuses, only: [:index]
+  end
 end

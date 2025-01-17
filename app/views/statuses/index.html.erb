@@ -1,0 +1,24 @@
+<div class="container mt-5">
+  <h2>Status for <%= @user.name %></h2>
+
+  <% if @statuses.any? %>
+    <table class="table table-bordered mt-4">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Status Content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @statuses.each do |status| %>
+          <tr>
+            <td><%= status.date.strftime('%d-%m-%Y') %></td>
+            <td><%= status.content %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>No statuses available for this user.</p>
+  <% end %>
+</div>

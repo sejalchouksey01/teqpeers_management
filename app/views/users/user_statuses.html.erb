@@ -1,0 +1,26 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow mb-4">
+        <div class="card-header">
+          <h4 class="card-title">Status of Trainees</h4>
+        </div>
+        <div class="card-body">
+          <% if @trainees.any? %>
+            <ul class="list-group">
+              <ul class="list-group">
+                <% @trainees.each do |trainee| %>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <%= trainee.name %> <%= link_to 'View Statuses', user_statuses_path(trainee), class: 'btn btn-link' %>
+                  </li>
+                <% end %>
+              </ul>
+            </ul>
+          <% else %>
+            <p>No trainees found.</p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
