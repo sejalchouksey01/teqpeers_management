@@ -23,29 +23,45 @@
   </head>
 
   <body>
-    <%if current_user.present? %>
-      <div class="container mt-5">
-        <!-- Header Section -->
-        <div class="d-flex  w-100 justify-content-between align-items-center mb-4">
-          <!-- Left Section: Title -->
-          <a href="<%= dashboard_path %>">
-            <h1 class="text-primary mb-0">Teqpeers</h1>
-          </a>
-          <!-- Middle Section: User Info -->
-          <div class="d-flex align-items-center">
-            <span class="badge bg-secondary me-3 custom-badge text-wrap" style="height: 38px;">
-              Welcome, <%= current_user.first_name %>!
-            </span>
+    <% if current_user.present? %>
+      <header class="header-wrapper shadow-sm" style="background-color: #ffffff; border-bottom: 1px solid #eef2f7;">
+        <div class="container">
+          <div class="d-flex justify-content-between align-items-center py-3">
+            <!-- Left Section: Logo -->
+            <a href="<%= dashboard_path %>" class="text-decoration-none">
+              <div class="d-flex align-items-center">
+                <h1 class="brand-text mb-0" style="background: linear-gradient(45deg, #4a90e2, #5c6bc0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2rem; font-weight: 700;">
+                  Teqpeers
+                </h1>
+              </div>
+            </a>
 
-            <!-- Right Section: Logout Button -->
-            <div class="mr-4">
-              <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: 'btn btn-danger custom-btn' %>
+            <!-- Right Section: User Info and Logout -->
+            <div class="d-flex align-items-center gap-4">
+              <!-- User Welcome Message -->
+              <div class="user-welcome px-4 py-2 rounded-pill" style="background-color: #e3f2fd;">
+                <div class="d-flex align-items-center">
+                  <div class="user-avatar me-2">
+                    <i class="fas fa-user-circle" style="color: #4a90e2; font-size: 1.2rem;"></i>
+                  </div>
+                  <span class="fw-semibold" style="color: #4a90e2;">
+                    Welcome, <%= current_user.first_name %>!
+                  </span>
+                </div>
+              </div>
+              <!-- Logout Button -->
+              <%= button_to destroy_user_session_path, 
+                  method: :delete, 
+                  class: 'logout-btn btn border-0 rounded-pill px-4 py-2 d-flex align-items-center gap-2',
+                  style: 'background-color: #ff6b6b;' do %>
+                <i class="fas fa-sign-out-alt text-white"></i>
+                <span class="text-white fw-semibold">Logout</span>
+              <% end %>
             </div>
           </div>
         </div>
-      </div>
+      </header>
     <%end%>
     <%= yield %>
-    <p class="alert"><%= alert %></p>
   </body>
 </html>

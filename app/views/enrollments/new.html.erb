@@ -1,0 +1,31 @@
+<div class="container mt-5">
+  <h2 class="text-center text-primary">Add Trainees to <%= @course.name %></h2>
+  <hr class="mb-4">
+
+  <% if @trainees.any? %>
+    <table class="table table-striped table-hover table-bordered">
+      <thead class="table-dark">
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @trainees.each do |trainee| %>
+          <tr>
+            <td><%= trainee.name %></td>
+            <td><%= trainee.email %></td>
+            <td>
+              <%= button_to 'Enroll', course_enrollments_path(@course, user_id: trainee.id), method: :post, class: 'btn btn-success btn-sm' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <div class="alert alert-info text-center">
+      No trainees are available for enrollment in this course.
+    </div>
+  <% end %>
+</div>

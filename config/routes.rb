@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   root to: "home#index"
   resources :courses do
     resources :feedbacks
+    resources :enrollments, only: [:new, :create]
   end
   post 'users/mark_attendance', to: 'users#mark_attendance', as: 'mark_user_attendance'
   get 'users', to: 'users#index'
@@ -25,5 +26,6 @@ Rails.application.routes.draw do
   
   resources :users, only: [:index] do
     resources :statuses, only: [:index]
+    resources :attendances, only: [:index]
   end
 end

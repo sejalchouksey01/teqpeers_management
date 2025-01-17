@@ -1,23 +1,41 @@
 <div class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-md-8">
-      <div class="card shadow mb-4">
-        <div class="card-header">
-          <h4 class="card-title">Status of Trainees</h4>
+      <div class="card shadow-lg border-0 rounded-lg">
+        <div class="card-header text-white py-3" style="background-color: #4a90e2;">
+          <h4 class="card-title mb-0">
+            <i class="fas fa-users me-2"></i>
+            Status of Trainees
+          </h4>
         </div>
-        <div class="card-body">
+        <div class="card-body bg-light">
           <% if @trainees.any? %>
             <ul class="list-group">
-              <ul class="list-group">
-                <% @trainees.each do |trainee| %>
-                  <li class="list-group-item d-flex justify-content-between align-items-center">
-                  <%= trainee.name %> <%= link_to 'View Statuses', user_statuses_path(trainee), class: 'btn btn-link' %>
-                  </li>
-                <% end %>
-              </ul>
+              <% @trainees.each do |trainee| %>
+                <li class="list-group-item d-flex justify-content-between align-items-center border-0 mb-3 shadow-sm hover-shadow transition-all"
+                    style="border-left: 4px solid #4a90e2 !important;">
+                  <div class="d-flex align-items-center">
+                    <div class="avatar me-3">
+                      <i class="fas fa-user-circle" style="font-size: 1.5rem; color: #5c6bc0;"></i>
+                    </div>
+                    <span class="fw-semibold" style="color: #2c3e50;">
+                      <%= trainee.name %>
+                    </span>
+                  </div>
+                  <%= link_to user_statuses_path(trainee), 
+                      class: 'btn btn-link d-flex align-items-center status-btn',
+                      style: 'color: #4a90e2; text-decoration: none;' do %>
+                    <span class="me-2">View Statuses</span>
+                    <i class="fas fa-chevron-right"></i>
+                  <% end %>
+                </li>
+              <% end %>
             </ul>
           <% else %>
-            <p>No trainees found.</p>
+            <div class="alert alert-info text-center" role="alert">
+              <i class="fas fa-info-circle me-2"></i>
+              No trainees found.
+            </div>
           <% end %>
         </div>
       </div>

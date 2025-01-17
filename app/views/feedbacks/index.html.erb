@@ -1,34 +1,61 @@
 <div class="container mt-5">
   <!-- Feedbacks Section -->
-  <div class="card shadow-lg mb-4">
-    <div class="card-header bg-primary text-white">
-      <h4 class="card-title">Course Feedbacks For <%= current_user.name %> </h4>
+  <div class="card shadow-lg mb-4 border-0 rounded-lg">
+    <div class="card-header text-white" style="background-color: #4a90e2;">
+      <h4 class="card-title mb-0 py-2">
+        <i class="fas fa-comment-dots me-2"></i>
+        Course Feedbacks For <%= current_user.name %>
+      </h4>
     </div>
-    <div class="card-body">
+    <div class="card-body bg-light">
       <% if @feedbacks.any? %>
         <ul class="list-group">
           <% @feedbacks.each do |feedback| %>
-            <li class="list-group-item d-flex justify-content-between align-items-center mb-3 border rounded">
-              <div>
-                <!-- Rating Section with background color depending on the rating -->
-                <strong>Rating:</strong>
-                <span class="badge
-                            <%= 'bg-success' if feedback.rating >= 4 %>
-                            <%= 'bg-warning' if feedback.rating == 3 %>
-                            <%= 'bg-danger' if feedback.rating < 3 %>">
-                            <%= feedback.rating %>/5
-                </span>
-                <br>
-                <strong>Detail:</strong> <%= feedback.detail %>
+            <li class="list-group-item d-flex justify-content-between align-items-start mb-3 border-0 shadow-sm hover-shadow transition-all"
+                style="border-left: 4px solid <%= 
+                  if feedback.rating >= 4
+                    '#2ecc71'
+                  elsif feedback.rating == 3
+                    '#f1c40f'
+                  else
+                    '#e74c3c'
+                  end
+                %> !important;">
+              <div class="ms-2 me-auto">
+                <div class="d-flex align-items-center mb-2">
+                  <span class="fw-semibold me-2">Rating:</span>
+                  <span class="badge rounded-pill <%= 
+                    if feedback.rating >= 4
+                      'bg-success-light text-success'
+                    elsif feedback.rating == 3
+                      'bg-warning-light text-warning'
+                    else
+                      'bg-danger-light text-danger'
+                    end
+                  %>" style="font-size: 0.9rem; padding: 8px 12px;">
+                    <i class="fas fa-star me-1"></i>
+                    <%= feedback.rating %>/5
+                  </span>
+                </div>
+                <div class="feedback-detail">
+                  <span class="fw-semibold">Detail:</span>
+                  <p class="mb-0 mt-1 text-muted"><%= feedback.detail %></p>
+                </div>
               </div>
-              <div class="text-muted">
-                <small><strong>Given By:</strong> <%= feedback.mentor.first_name %></small>
+              <div class="text-end ms-3">
+                <div class="mentor-info" style="color: #5c6bc0;">
+                  <i class="fas fa-user-tie me-1"></i>
+                  <small class="fw-semibold"><%= feedback.mentor.first_name %></small>
+                </div>
               </div>
             </li>
           <% end %>
         </ul>
       <% else %>
-        <p class="text-center text-muted">No feedbacks yet for this course.</p>
+        <div class="alert alert-info text-center" role="alert">
+          <i class="fas fa-info-circle me-2"></i>
+          No feedbacks yet for this course.
+        </div>
       <% end %>
     </div>
   </div>

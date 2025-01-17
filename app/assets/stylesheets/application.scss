@@ -36,3 +36,242 @@
   font-size: 16px; /* Set a consistent font size */
   line-height: 1; /* Ensure the text is centered properly */
 }
+
+.bg-success-light {
+  background-color: rgba(46, 204, 113, 0.1) !important;
+}
+
+.bg-warning-light {
+  background-color: rgba(241, 196, 15, 0.1) !important;
+}
+
+.bg-danger-light {
+  background-color: rgba(231, 76, 60, 0.1) !important;
+}
+
+.hover-shadow:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+  transition: all 0.3s ease;
+}
+
+.transition-all {
+  transition: all 0.3s ease;
+}
+
+.feedback-detail p {
+  line-height: 1.6;
+}
+
+.mentor-info {
+  font-size: 0.9rem;
+}
+
+.hover-shadow:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+.transition-all {
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #5c6bc0;
+  box-shadow: 0 0 0 0.2rem rgba(92, 107, 192, 0.25);
+}
+
+.btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+.header-wrapper {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  backdrop-filter: blur(8px);
+}
+
+.brand-text {
+  transition: transform 0.3s ease;
+}
+
+.brand-text:hover {
+  transform: scale(1.02);
+}
+
+.user-welcome {
+  transition: all 0.3s ease;
+}
+
+.user-welcome:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(74, 144, 226, 0.1);
+}
+
+.logout-btn {
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(255, 107, 107, 0.2);
+}
+
+.logout-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(255, 107, 107, 0.3);
+  background-color: #ff5252 !important;
+}
+
+@media (max-width: 768px) {
+  .brand-text {
+    font-size: 1.5rem !important;
+  }
+
+  .user-welcome {
+    font-size: 0.9rem;
+    padding: 0.4rem 1rem !important;
+  }
+
+  .logout-btn {
+    padding: 0.4rem 1rem !important;
+  }
+}
+
+.hover-shadow:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+  transition: all 0.3s ease;
+}
+
+.transition-all {
+  transition: all 0.3s ease;
+}
+
+/* Custom Checkbox Styling */
+.custom-checkbox-container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 0;
+  cursor: pointer;
+  user-select: none;
+}
+
+.custom-checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: -12px;
+  right: -35px;
+  height: 25px;
+  width: 25px;
+  background-color: #fff;
+  border: 2px solid #4a90e2;
+  border-radius: 5px;
+  transition: all 0.2s ease;
+}
+
+.custom-checkbox-container:hover input ~ .checkmark {
+  background-color: #e3f2fd;
+}
+
+.custom-checkbox-container input:checked ~ .checkmark {
+  background-color: #4a90e2;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.custom-checkbox-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.custom-checkbox-container .checkmark:after {
+  left: 8px;
+  top: 4px;
+  width: 6px;
+  height: 12px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* Button Styling */
+.btn {
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(74, 144, 226, 0.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .card-title {
+    font-size: 1.2rem;
+  }
+  
+  .list-group-item {
+    padding: 0.75rem;
+  }
+}
+
+.hover-shadow:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+  transition: all 0.3s ease;
+}
+
+.transition-all {
+  transition: all 0.3s ease;
+}
+
+.status-btn {
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.status-btn:hover {
+  background-color: #e3f2fd;
+  color: #4a90e2 !important;
+  transform: translateX(5px);
+}
+
+.status-btn:hover i {
+  transform: translateX(3px);
+}
+
+.status-btn i {
+  transition: transform 0.3s ease;
+}
+
+.list-group-item {
+  background-color: white;
+  border-radius: 8px !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .card-title {
+    font-size: 1.2rem;
+  }
+  
+  .list-group-item {
+    padding: 0.75rem;
+  }
+  
+  .status-btn {
+    padding: 0.4rem 0.8rem;
+  }
+}

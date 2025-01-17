@@ -1,34 +1,51 @@
+
 <div class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-md-8">
-      <div class="card shadow mb-4">
-        <div class="card-header">
-          <h4 class="card-title">Mark Attendance of <%= Date.today.strftime("%B %d, %Y") %></h4>
+      <div class="card shadow-lg border-0 rounded-lg">
+        <div class="card-header text-white py-3" style="background-color: #4a90e2;">
+          <h4 class="card-title mb-0">
+            <i class="fas fa-calendar-check me-2"></i>
+            Attendance Record - <%= Date.today.strftime("%B %d, %Y") %>
+          </h4>
         </div>
-        <div class="card-body">
+        <div class="card-body bg-light">
           <% if @trainees.any? %>
-            <ul class="list-group">
-              <%= form_with url: mark_user_attendance_path, method: :post, local: true do |form| %>
-                <ul class="list-group">
-                  <% @trainees.each do |trainee| %>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                      <%= trainee.name %>
-                      <!-- Checkbox for Marking Attendance -->
-                     <div class="form-check">
-                        <%= form.check_box "attendance[#{trainee.id}]",
-                                          class: "form-check-input custom-checkbox",
-                                          id: "present_#{trainee.id}",
-                                          checked: Attendance.exists?(user_id: trainee.id, date: Date.today, status: true) %>
+            <%= form_with url: mark_user_attendance_path, method: :post, local: true do |form| %>
+              <ul class="list-group attendance-list">
+                <% @trainees.each do |trainee| %>
+                  <li class="list-group-item d-flex justify-content-between align-items-center border-0 mb-3 shadow-sm hover-shadow transition-all"
+                      style="border-left: 4px solid #4a90e2 !important;">
+                    <div class="d-flex align-items-center">
+                      <div class="avatar me-3">
+                        <i class="fas fa-user-circle" style="font-size: 1.5rem; color: #5c6bc0;"></i>
                       </div>
-                    </li>
-                  <% end %>
-                </ul>
-
-                <%= form.submit "Save Attendance", class: "btn btn-primary mt-3" %>
-              <% end %>
-            </ul>
+                        <%= link_to user_attendances_path(trainee), class: 'fw-semibold', style: 'color: #2c3e50;' do %>
+                        <span><%= trainee.name %></span>
+                      <% end %>
+                    </div>
+                    <div class="custom-checkbox-wrapper">
+                      <label class="custom-checkbox-container">
+                        <%= form.check_box "attendance[#{trainee.id}]",
+                            class: "custom-checkbox",
+                            id: "present_#{trainee.id}",
+                            checked: Attendance.exists?(user_id: trainee.id, date: Date.today, status: true) %>
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
+                  </li>
+                <% end %>
+              </ul>
+              <div class="text-center mt-4">
+                <%= form.submit "Save Attendance", class: "btn text-white px-4 py-2", 
+                    style: "background-color: #4a90e2;" %>
+              </div>
+            <% end %>
           <% else %>
-            <p>No trainees found.</p>
+            <div class="alert alert-info text-center" role="alert">
+              <i class="fas fa-info-circle me-2"></i>
+              No trainees found.
+            </div>
           <% end %>
         </div>
       </div>
