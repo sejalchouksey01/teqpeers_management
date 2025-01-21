@@ -1,0 +1,8 @@
+<div class="d-flex mt-4 gap-3">
+  <%= link_to users_path, class: 'btn text-white w-50', style: 'background-color: #4a90e2;' do %>
+    <i class="fas fa-users me-2"></i>Trainees Attendance
+  <% end %>
+  <%= link_to users_path(status: true), class: 'btn text-white w-50', style: 'background-color: #5c6bc0;' do %>
+    <i class="fas fa-chart-line me-2"></i>Trainees Status
+  <% end %>
+</div>

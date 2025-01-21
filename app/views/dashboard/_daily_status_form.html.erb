@@ -1,0 +1,24 @@
+<div class="card shadow-lg mb-4 border-0 rounded-lg">
+  <div class="card-header text-white" style="background-color: #5c6bc0;">
+    <h5 class="card-title mb-0 py-2">
+      <i class="fas fa-pencil-alt me-2"></i>Daily Status
+    </h5>
+  </div>
+  <div class="card-body bg-light">
+    <%= form_with url: save_daily_status_path, method: :post, local: true do |form| %>
+      <div class="mb-3">
+        <%= form.label :content, "Daily Status Content", class: "form-label text-muted fw-semibold" %>
+        <%= form.text_area :content, class: "form-control border-0 shadow-sm", 
+            style: "background-color: #f8f9fa;",
+            rows: 4, placeholder: "Enter your daily status here..." %>
+      </div>
+      <div class="mb-3">
+        <%= form.label :date, "Date", class: "form-label text-muted fw-semibold" %>
+        <%= form.date_field :date, value: Date.today, class: "form-control border-0 shadow-sm",
+            style: "background-color: #f8f9fa;" %>
+      </div>
+      <%= form.submit "Save Status", class: "btn text-white w-100", 
+          style: "background-color: #5c6bc0;" %>
+    <% end %>
+  </div>
+</div>
