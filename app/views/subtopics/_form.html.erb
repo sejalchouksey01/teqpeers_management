@@ -1,0 +1,38 @@
+<%= form_with(model: [@course, @subtopic], local: true) do |form| %>
+  <% if @subtopic.errors.any? %>
+    <div class="alert alert-danger">
+      <h5><i class="fas fa-exclamation-triangle me-2"></i>
+        <%= pluralize(@subtopic.errors.count, "error") %> prohibited this subtopic from being saved:
+      </h5>
+      <ul>
+        <% @subtopic.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group mb-4">
+    <%= form.label :title, class: "form-label fw-semibold" %>
+    <%= form.text_field :title, 
+        class: "form-control form-control-lg shadow-sm",
+        placeholder: "Enter subtopic title",
+        required: true %>
+  </div>
+
+  <div class="form-group mb-4">
+    <%= form.label :description, class: "form-label fw-semibold" %>
+    <%= form.text_area :description, 
+        class: "form-control shadow-sm",
+        rows: 5,
+        placeholder: "Enter subtopic description",
+        required: true %>
+  </div>
+
+  <div class="form-group d-flex gap-2">
+    <%= form.submit form.object.new_record? ? "Create Subtopic" : "Update Subtopic", 
+        class: "btn #{form.object.new_record? ? 'btn-primary' : 'btn-success'} btn-lg" %>
+    <%= link_to "Cancel", course_subtopics_path(@course), 
+        class: "btn btn-outline-secondary btn-lg" %>
+  </div>
+<% end %>
