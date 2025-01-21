@@ -2,6 +2,7 @@ class SubtopicsController < ApplicationController
 
   before_action :set_course
   before_action :set_subtopic, only: [:edit, :destroy, :update]
+  before_action :is_authorised, only: [:new, :edit, :update, :create, :destroy]
 
   def index
     @subtopics = @course.subtopics

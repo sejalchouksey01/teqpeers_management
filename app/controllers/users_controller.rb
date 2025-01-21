@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
+  before_action :is_authorised, only: [:new, :create, :mark_attendance]
 
   def index
     @trainees = User.trainee
@@ -22,7 +23,7 @@ class UsersController < ApplicationController
   def mark_attendance
     params["attendance"].each do |data|
       user = User.find_by(id: data[0])
-      if user.present? && current_user.mentor?
+      if user.present?
         existing_attendance = Attendance.find_by(user_id: user.id, date: Date.today)
         if existing_attendance && existing_attendance.status != data[1]
           existing_attendance.update(status: data[1])
