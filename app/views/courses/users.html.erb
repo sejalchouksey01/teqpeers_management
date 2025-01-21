@@ -15,7 +15,7 @@
                     <h5 class="mb-1"><%= trainee.name %></h5>
                     <p class="mb-0 text-muted"><%= trainee.email %></p>
                   </div>
-                  <%= link_to 'Create Feedback', new_course_feedback_path(course_id: @course.id, user_id: trainee.id), class: 'btn btn-primary btn-sm ml-2' %>
+                  <%= link_to 'Create Feedback', new_course_feedback_path(course_id: @course.id, user_id: trainee.id, subtopic_id: params[:subtopic_id]), class: 'btn btn-primary btn-sm ml-2' %>
                 </li>
               <% end %>
             </ul>

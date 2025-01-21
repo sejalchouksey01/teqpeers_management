@@ -1,0 +1,84 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-12">
+      <div class="card shadow-lg border-0 rounded-lg">
+        <div class="card-header text-white py-3" style="background-color: #4a90e2;">
+          <div class="d-flex justify-content-between align-items-center">
+            <h4 class="card-title mb-0">
+              <i class="fas fa-book me-2"></i>
+              <%= @course.name %>
+            </h4>
+            <div class="d-flex gap-3">
+              <%= link_to edit_course_path(@course), 
+                          class: 'btn btn-secondary rounded-pill px-3 py-2 d-flex align-items-center gap-2' do %>
+                <i class="fas fa-edit"></i>
+                <span>Edit</span>
+              <% end %>
+              <%= button_to course_path(@course), 
+                            method: :delete, 
+                            data: { confirm: 'Are you sure you want to delete this course?' },
+                            class: 'btn btn-danger rounded-pill px-3 py-2 d-flex align-items-center gap-2' do %>
+                <i class="fas fa-trash"></i>
+                <span>Delete</span>
+              <% end %>
+              <%= link_to course_users_path(@course.id), class: 'btn btn-info rounded-pill px-3 py-2 d-flex align-items-center gap-2' do %>
+                <i class="fas fa-users"></i>
+                <span>Course Trainees</span>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="card-body bg-light">
+          <% if @subtopics.any? %>
+            <div class="row g-4">
+              <% @subtopics.each do |subtopic| %>
+                <div class="col-md-6 col-lg-4">
+                  <div class="card h-100 border-0 shadow-sm hover-card">
+                    <div class="card-body">
+                      <div class="d-flex justify-content-between align-items-start mb-3">
+                        <h5 class="card-title mb-0"><%= subtopic.title %></h5>
+                        <div class="action-buttons d-flex gap-2">
+                          <%= link_to edit_course_subtopic_path(@course, subtopic), 
+                                      class: 'btn btn-outline-primary d-flex align-items-center gap-2',
+                                      title: 'Edit Subtopic' do %>
+                            <i class="fas fa-edit"></i>
+                            <span>Edit</span>
+                          <% end %>
+                          
+                          <%= button_to course_subtopic_path(@course, subtopic), 
+                                        method: :delete,
+                                        data: { confirm: 'Are you sure you want to delete this subtopic?' },
+                                        class: 'btn btn-outline-danger d-flex align-items-center gap-2',
+                                        title: 'Delete Subtopic',
+                                        form_class: 'd-inline' do %>
+                            <i class="fas fa-trash"></i>
+                            <span>Delete</span>
+                          <% end %>
+                        </div>
+
+                      </div>
+                      <p class="card-text text-muted"><%= subtopic.description %></p>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          <% else %>
+            <div class="alert alert-info text-center" role="alert">
+              <i class="fas fa-info-circle me-2"></i>
+              No subtopics found for this course.
+            </div>
+          <% end %>
+          
+          <div class="text-center mt-5">
+            <%= link_to new_course_subtopic_path(@course), 
+                class: "btn btn-primary btn-lg rounded-pill shadow-sm px-4 py-2 hover-button" do %>
+              <i class="fas fa-plus-circle me-2"></i>
+              Add New Subtopic
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

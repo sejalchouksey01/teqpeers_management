@@ -1,6 +1,7 @@
 class FeedbacksController < ApplicationController
   before_action :set_course, only: [:new, :create]
   before_action :set_trainee, only: [:new, :create]
+  before_action :set_sub_topic, only: [ :create]
 
   def index
     @feedbacks = Course.find_by(id: params[:course_id]).feedbacks.where(trainee_id: current_user.id)
@@ -15,7 +16,7 @@ class FeedbacksController < ApplicationController
     @feedback.course = @course
     @feedback.mentor = current_user
     @feedback.trainee = @trainee
-
+    @feedback.subtopic = @subtopic
     if @feedback.save
       redirect_to course_users_path(@course), notice: 'Feedback was successfully created.'
     else
@@ -31,6 +32,10 @@ class FeedbacksController < ApplicationController
 
   def set_trainee
     @trainee = User.find_by(id: params[:user_id])
+  end
+
+  def set_sub_topic
+    @subtopic = @course.subtopics.find_by(id: params[:feedback][:subtopic_id])
   end
 
   def feedback_params

@@ -27,7 +27,6 @@
       <header class="header-wrapper shadow-sm" style="background-color: #ffffff; border-bottom: 1px solid #eef2f7;">
         <div class="container">
           <div class="d-flex justify-content-between align-items-center py-3">
-            <!-- Left Section: Logo -->
             <a href="<%= dashboard_path %>" class="text-decoration-none">
               <div class="d-flex align-items-center">
                 <h1 class="brand-text mb-0" style="background: linear-gradient(45deg, #4a90e2, #5c6bc0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2rem; font-weight: 700;">
@@ -36,8 +35,7 @@
               </div>
             </a>
 
-            <!-- Right Section: User Info and Logout -->
-            <div class="d-flex align-items-center gap-4">
+            <div class="d-flex align-items-center gap-3">
               <!-- User Welcome Message -->
               <div class="user-welcome px-4 py-2 rounded-pill" style="background-color: #e3f2fd;">
                 <div class="d-flex align-items-center">
@@ -49,19 +47,36 @@
                   </span>
                 </div>
               </div>
-              <!-- Logout Button -->
-              <%= button_to destroy_user_session_path, 
-                  method: :delete, 
-                  class: 'logout-btn btn border-0 rounded-pill px-4 py-2 d-flex align-items-center gap-2',
-                  style: 'background-color: #ff6b6b;' do %>
-                <i class="fas fa-sign-out-alt text-white"></i>
-                <span class="text-white fw-semibold">Logout</span>
-              <% end %>
+
+              <!-- Spacer to push buttons to the right -->
+              <div class="ms-auto d-flex align-items-center gap-2">
+                <% if current_user.mentor? && params[:controller] == "dashboard" %>
+                  <div class="nav-item">
+                    <%= link_to new_course_path, 
+                      class: 'btn btn-primary rounded-pill px-3 py-2 d-flex align-items-center gap-2' do %>
+                      <span>Create Course</span>
+                    <% end %>
+                  </div>
+                  <div class="nav-item">
+                    <%= link_to new_user_path, 
+                      class: 'btn btn-primary rounded-pill px-3 py-2 d-flex align-items-center gap-2' do %>
+                      <span>Create User</span>
+                    <% end %>
+                  </div>
+                <% end %>
+                <%= button_to destroy_user_session_path, 
+                    method: :delete, 
+                    class: 'logout-btn btn border-0 rounded-pill px-3 py-2 d-flex align-items-center gap-2',
+                    style: 'background-color: #ff6b6b;' do %>
+                  <i class="fas fa-sign-out-alt text-white"></i>
+                  <span class="text-white fw-semibold">Logout</span>
+                <% end %>
+              </div>
             </div>
           </div>
         </div>
       </header>
-    <%end%>
+    <% end %>
     <%= yield %>
   </body>
 </html>

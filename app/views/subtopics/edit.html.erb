@@ -1,0 +1,38 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-lg border-0 rounded-lg">
+        <div class="card-header text-white py-3" style="background-color: #4a90e2;">
+          <h4 class="card-title mb-0">
+            <i class="fas fa-edit me-2"></i>Edit Subtopic
+          </h4>
+        </div>
+        <div class="card-body bg-light">
+          <%= form_with model: [@course, @subtopic], local: true do |form| %>
+            <% if @subtopic.errors.any? %>
+              <div class="alert alert-danger">
+                <ul>
+                  <% @subtopic.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+
+            <div class="mb-3">
+              <%= form.label :title, 'Subtopic Title', class: 'form-label text-muted fw-semibold' %>
+              <%= form.text_field :title, class: 'form-control border-0 shadow-sm', placeholder: 'Enter subtopic title' %>
+            </div>
+
+            <div class="mb-3">
+              <%= form.label :description, 'Subtopic Description', class: 'form-label text-muted fw-semibold' %>
+              <%= form.text_area :description, class: 'form-control border-0 shadow-sm', rows: 4, placeholder: 'Enter subtopic description' %>
+            </div>
+
+            <%= form.submit 'Update Subtopic', class: 'btn btn-success w-100' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

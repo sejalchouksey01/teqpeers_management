@@ -1,7 +1,7 @@
 class StatusesController < ApplicationController
 
   def index
-    @user = User.find(params[:user_id]) # Assuming statuses are nested under users
+    @user = User.find(params[:user_id]) 
     @statuses = @user.statuses.order(date: :desc) 
   end
 
@@ -17,6 +17,6 @@ class StatusesController < ApplicationController
   private
 
   def status_params
-    params.require(:status).permit(:content, :date)
+    params.permit(:content, :date)
   end
 end

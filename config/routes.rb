@@ -16,15 +16,17 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root to: "home#index"
   resources :courses do
-    resources :feedbacks
     resources :enrollments, only: [:new, :create]
+    resources :subtopics
+    resources :feedbacks
   end
   post 'users/mark_attendance', to: 'users#mark_attendance', as: 'mark_user_attendance'
+  post 'create_user', to: 'users#create', as: 'create_user'
   get 'users', to: 'users#index'
   get 'courses/:course_id/users', to: 'courses#users', as: 'course_users'
   post 'save_daily_status', to: 'statuses#save_daily_status'
   
-  resources :users, only: [:index] do
+  resources :users, only: [:index, :new] do
     resources :statuses, only: [:index]
     resources :attendances, only: [:index]
   end
