@@ -23,10 +23,11 @@ Rails.application.routes.draw do
   post 'users/mark_attendance', to: 'users#mark_attendance', as: 'mark_user_attendance'
   post 'create_user', to: 'users#create', as: 'create_user'
   get 'users', to: 'users#index'
+  get 'portal_users', to: 'users#portal_users', as: 'portal_users'
   get 'courses/:course_id/users', to: 'courses#users', as: 'course_users'
   post 'save_daily_status', to: 'statuses#save_daily_status'
   
-  resources :users, only: [:index, :new] do
+  resources :users, only: [:index, :new, :edit, :update, :destroy] do
     resources :statuses, only: [:index]
     resources :attendances, only: [:index]
   end

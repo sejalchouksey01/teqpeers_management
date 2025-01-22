@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :is_authorised, only: [:new, :create, :mark_attendance]
+  before_action :is_authorised
 
   def index
     @trainees = User.trainee
@@ -32,6 +32,31 @@ class UsersController < ApplicationController
           Attendance.create(user_id: user.id, status: data[1].to_i, date: Date.today)
         end
       end
+    end
+  end
+
+  def portal_users
+    @users = User.all
+  end
+
+  def destroy
+    binding.pry
+    @user = User.find(params[:id])
+    if @user.destroy
+      redirect_to portal_users_path
+    end
+  end
+
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:id])
+    if @user.update(user_params)
+      redirect_to portal_users_path
+    else
+      render "edit"
     end
   end
 
