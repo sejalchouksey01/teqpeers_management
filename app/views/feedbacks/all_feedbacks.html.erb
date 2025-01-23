@@ -1,0 +1,138 @@
+<div class="container my-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>All Feedbacks</h2>
+    <button id="export-csv" class="btn btn-success" disabled>Export to CSV</button>
+  </div>
+  
+  <% @feedbacks.group_by { |f| f.created_at.strftime("%d/%b/%y") }.each do |date, feedbacks| %>
+    <div class="card mb-4">
+      <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+        <h5 class="mb-0"><%= date %></h5>
+        <div class="form-check">
+          <input class="form-check-input select-all" type="checkbox" value="" data-date="<%= date %>" id="select-all-<%= date.gsub('/', '') %>">
+          <label class="form-check-label" for="select-all-<%= date.gsub('/', '') %>">
+            Select All
+          </label>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-hover table-bordered">
+            <colgroup>
+              <col style="width: 5%;">
+              <col style="width: 15.75%;">
+              <col style="width: 15.75%;">
+              <col style="width: 15.75%;">
+              <col style="width: 15.75%;">
+              <col style="width: 15.75%;">
+              <col style="width: 16.25%;">
+            </colgroup>
+            <thead>
+              <tr class="table-light">
+                <th></th>
+                <th>Name</th>
+                <th>Learning Capability</th>
+                <th>Task Performance</th>
+                <th>Behaviour</th>
+                <th>Communication</th>
+                <th>Overall</th>
+                <th>Course</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% feedbacks.each do |feedback| %>
+                <tr>
+                <td>
+                  <div class="form-check">
+                    <input class="form-check-input feedback-checkbox" type="checkbox" value="<%= feedback.id %>" data-date="<%= date %>" id="feedback-<%= feedback.id %>">
+                    <label class="form-check-label" for="feedback-<%= feedback.id %>">
+                    </label>
+                  </div>
+                </td>
+                  <td><%= feedback.trainee.name %></td>
+                  <td><%= feedback.feedback_data["learningCapability"] %></td>
+                  <td><%= feedback.feedback_data["taskPerformance"] %></td>
+                  <td><%= feedback.feedback_data["behavior"] %></td>
+                  <td><%= feedback.feedback_data["communication"] %></td>
+                  <td><%= feedback.feedback_data["overall"] %></td>
+                  <td><%= feedback.course.name %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<style>
+  table th, table td {
+    width: 16.67%;
+  }
+
+  table th:first-child, table td:first-child {
+    width: 5%;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const exportButton = document.getElementById('export-csv');
+    const feedbackCheckboxes = document.querySelectorAll('.feedback-checkbox');
+    const selectAllCheckboxes = document.querySelectorAll('.select-all');
+
+    const updateExportButtonState = () => {
+      const anySelected = Array.from(feedbackCheckboxes).some(cb => cb.checked);
+      exportButton.disabled = !anySelected;
+    };
+
+    feedbackCheckboxes.forEach(checkbox => {
+      checkbox.addEventListener('change', updateExportButtonState);
+    });
+
+    selectAllCheckboxes.forEach(selectAll => {
+      selectAll.addEventListener('change', () => {
+        const date = selectAll.getAttribute('data-date');
+        const feedbacksForDate = document.querySelectorAll(`.feedback-checkbox[data-date="${date}"]`);
+        
+        feedbacksForDate.forEach(feedbackCheckbox => {
+          feedbackCheckbox.checked = selectAll.checked;
+        });
+
+        updateExportButtonState();
+      });
+    });
+
+    exportButton.addEventListener('click', () => {
+      const selectedIds = Array.from(feedbackCheckboxes)
+        .filter(cb => cb.checked)
+        .map(cb => cb.value);
+
+      const form = document.createElement('form');
+      form.method = 'POST';
+      form.action = '/feedbacks/export_to_csv';
+      form.style.display = 'none';
+
+      const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+      const csrfInput = document.createElement('input');
+      csrfInput.type = 'hidden';
+      csrfInput.name = 'authenticity_token';
+      csrfInput.value = csrfToken;
+      form.appendChild(csrfInput);
+
+      selectedIds.forEach(id => {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'feedback_ids[]';
+        input.value = id;
+        form.appendChild(input);
+      });
+
+      document.body.appendChild(form);
+      form.submit();
+    });
+  });
+
+
+</script>

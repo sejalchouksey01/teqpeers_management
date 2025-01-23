@@ -51,6 +51,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_17_113629) do
   create_table "feedbacks", force: :cascade do |t|
     t.text "detail"
     t.integer "rating"
+    t.jsonb "feedback_data"
+    t.string "from_to_date"
     t.bigint "mentor_id", null: false
     t.bigint "trainee_id", null: false
     t.bigint "course_id", null: false

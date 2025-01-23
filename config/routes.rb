@@ -26,6 +26,10 @@ Rails.application.routes.draw do
   get 'portal_users', to: 'users#portal_users', as: 'portal_users'
   get 'courses/:course_id/users', to: 'courses#users', as: 'course_users'
   post 'save_daily_status', to: 'statuses#save_daily_status'
+  get 'bi_weekly_feedback/:user_id', to: 'feedbacks#bi_weekly', as: 'bi_weekly_feedback'
+  post 'bi_weekly_feedback/:user_id', to: 'feedbacks#create_bi_weekly', as: 'create_bi_weekly_feedback'
+  get 'feedbacks/all', to: 'feedbacks#all_feedbacks', as: 'all_feedbacks'
+  post 'feedbacks/export_to_csv', to: 'feedbacks#export_to_csv', as: 'export_feedbacks_to_csv', defaults: { format: :csv }
   
   resources :users, only: [:index, :new, :edit, :update, :destroy] do
     resources :statuses, only: [:index]

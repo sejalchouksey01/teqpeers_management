@@ -1,17 +1,24 @@
-<%# app/views/users/index.html.erb %>
-
 <div class="container mt-4">
   <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center bg-primary text-white">
       <h3 class="mb-0">Users</h3>
-      <%= link_to new_user_path, class: "btn btn-light d-flex align-items-center gap-2" do %>
-        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-        </svg>
-        Add User
-      <% end %>
+      <div class="d-flex gap-2">
+        <%= link_to new_user_path, class: "btn btn-light d-flex align-items-center gap-2" do %>
+          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+          </svg>
+          Add User
+        <% end %>
+
+        <%= link_to all_feedbacks_path, class: "btn btn-light d-flex align-items-center gap-2" do %>
+          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          All Feedbacks
+        <% end %>
+      </div>
     </div>
-    
+      
     <div class="card-body">
       <div class="table-responsive">
         <table class="table table-hover table-bordered user-table">
@@ -20,6 +27,7 @@
               <th>Name</th>
               <th>Email</th>
               <th>Role</th>
+              <th>Feedback</th>
               <th class="text-center">Actions</th>
             </tr>
           </thead>
@@ -40,7 +48,21 @@
                     <%= user.role %>
                   </span>
                 </td>
+                
+                <!-- Feedback Column -->
+                <td class="align-middle">
+                  <%= button_to bi_weekly_feedback_path(user_id: user.id), 
+                      method: :get, 
+                      class: "btn btn-sm btn-outline-success d-flex align-items-center gap-2" do %>
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h11M9 21v-3M5 18l4 4 4-4M16 3h5v5m0 0l-6-6m6 6L10 15"/>
+                    </svg>
+                    Feedback
+                  <% end %>
+                </td>
 
+
+                <!-- Actions Column -->
                 <td class="text-center align-middle">
                   <div class="btn-group">
                     <%= link_to edit_user_path(user), class: "btn btn-outline-primary btn-sm" do %>

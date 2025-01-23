@@ -1,0 +1,122 @@
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Trainee Performance Evaluation</h2>
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <%= form_with url: create_bi_weekly_feedback_path(user_id: @user.id), method: :post do |f| %>
+        <div class="card shadow-sm">
+          <div class="card-body">
+          <!-- Course Selection -->
+          <div class="form-group mb-3">
+            <label for="course_id" class="form-label">Select Course</label>
+            <select class="form-control" id="course_id" name="course_id" required>
+              <option value="">Choose a course...</option>
+              <%= @user.courses.map { |course| %>
+                <option value="<%= course.id %>"><%= course.name %></option>
+              <% } %>
+            </select>
+          </div>
+            <!-- Learning Capability -->
+            <div class="form-group mb-3">
+              <label for="learningCapability" class="form-label">Learning Capability (0-10)</label>
+              <input type="number" 
+                    class="form-control" 
+                    id="learningCapability" 
+                    name="learningCapability"
+                    step="0.1" 
+                    min="0" 
+                    max="10" 
+                    required>
+            </div>
+
+            <!-- Task Performance -->
+            <div class="form-group mb-3">
+              <label for="taskPerformance" class="form-label">Task Performance (0-10)</label>
+              <input type="number" 
+                    class="form-control" 
+                    id="taskPerformance" 
+                    name="taskPerformance"
+                    step="0.1" 
+                    min="0" 
+                    max="10" 
+                    required>
+            </div>
+
+            <!-- Behavior -->
+            <div class="form-group mb-3">
+              <label for="behavior" class="form-label">Behavior (0-10)</label>
+              <input type="number" 
+                    class="form-control" 
+                    id="behavior" 
+                    name="behavior"
+                    step="0.1" 
+                    min="0" 
+                    max="10" 
+                    required>
+            </div>
+
+            <!-- Communication -->
+            <div class="form-group mb-3">
+              <label for="communication" class="form-label">Communication (0-10)</label>
+              <input type="number" 
+                    class="form-control" 
+                    id="communication" 
+                    name="communication"
+                    step="0.1" 
+                    min="0" 
+                    max="10" 
+                    required>
+            </div>
+
+            <!-- Overall -->
+            <div class="form-group mb-3">
+              <label for="overall" class="form-label">Overall (0-10)</label>
+              <input type="number" 
+                    class="form-control" 
+                    id="overall" 
+                    name="overall"
+                    step="0.1" 
+                    min="0" 
+                    max="10" 
+                    required>
+            </div>
+
+            <!-- Comments -->
+            <div class="form-group mb-3">
+              <label for="comments" class="form-label">Additional Comments</label>
+              <textarea class="form-control" 
+                        id="comments" 
+                        name="comments" 
+                        rows="4" 
+                        placeholder="Enter any additional comments..."></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary w-100">Submit Evaluation</button>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<style>
+.form-control:focus {
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.btn-primary {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+.btn-primary:hover {
+  background-color: #0b5ed7;
+  border-color: #0a58ca;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  opacity: 1;
+}
+</style>
