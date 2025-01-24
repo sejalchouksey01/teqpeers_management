@@ -16,7 +16,7 @@ gem "turbo-rails"
 gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
-gem 'csv'
+gem "csv"
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
@@ -28,8 +28,8 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "solid_cache"
 gem "solid_queue"
 gem "solid_cable"
-gem "devise" 
-gem 'sprockets-rails'
+gem "devise"
+gem "sprockets-rails"
 
 
 
@@ -41,8 +41,8 @@ gem "kamal", require: false
 
 # Add HTTP asset caching/compression and X-Sendfile acceleration to Puma [https://github.com/basecamp/thruster/]
 gem "thruster", require: false
-gem 'bootstrap', '~> 5.3.0'
-gem 'sassc-rails'
+gem "bootstrap", "~> 5.3.0"
+gem "sassc-rails"
 
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
@@ -62,8 +62,8 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
-  gem 'pry' 
-  gem 'byebug'
+  gem "pry"
+  gem "byebug"
 end
 
 group :test do

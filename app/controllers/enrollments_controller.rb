@@ -6,7 +6,7 @@ class EnrollmentsController < ApplicationController
 
   def create
     @course = Course.find(params[:course_id])
-    @enrollment = Enrollment.new(user_id: params[:user_id], course: @course ) if @course.present?
+    @enrollment = Enrollment.new(user_id: params[:user_id], course: @course) if @course.present?
     if @enrollment.save
       redirect_to new_course_enrollment_path(@course), notice: "User has been enrolled in the course."
     else

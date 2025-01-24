@@ -1,6 +1,6 @@
 class CoursesController < ApplicationController
   before_action :is_mentor
-  before_action :set_course, only: [ :edit, :update, :destroy]
+  before_action :set_course, only: [ :edit, :update, :destroy ]
 
   def users
     @course = Course.find_by(id: params[:course_id])
@@ -15,7 +15,7 @@ class CoursesController < ApplicationController
     @course = Course.new(course_params)
 
     if @course.save
-      redirect_to dashboard_path, notice: 'Course was successfully created.'
+      redirect_to dashboard_path, notice: "Course was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
@@ -23,7 +23,7 @@ class CoursesController < ApplicationController
 
   def destroy
     if @course.destroy
-      redirect_to dashboard_path, notice: 'Course deleted successfully'
+      redirect_to dashboard_path, notice: "Course deleted successfully"
     else
       render "not"
     end
@@ -34,7 +34,7 @@ class CoursesController < ApplicationController
 
   def update
     if @course.update(course_params)
-      redirect_to course_subtopics_path(@course), notice: 'Course was successfully updated.'
+      redirect_to course_subtopics_path(@course), notice: "Course was successfully updated."
     else
       render :edit
     end

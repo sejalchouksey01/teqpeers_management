@@ -2,25 +2,25 @@
 
 class Users::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
-  skip_before_action :require_no_authentication, only: [:new]
+  skip_before_action :require_no_authentication, only: [ :new ]
 
 
   # GET /resource/sign_in
   def new
     if user_signed_in?
-      redirect_to dashboard_path , notice: "You are already signed in."
+      redirect_to dashboard_path, notice: "You are already signed in."
     else
       super
-    end 
+    end
   end
 
   # POST /resource/sign_in
   def create
     if user_signed_in?
-      redirect_to dashboard_path , notice: "You are already signed in."
+      redirect_to dashboard_path, notice: "You are already signed in."
     else
       super
-    end 
+    end
   end
 
   # DELETE /resource/sign_out

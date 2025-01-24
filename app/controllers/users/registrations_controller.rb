@@ -3,7 +3,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
-  skip_before_action :require_no_authentication, only: [:new, :create]
+  skip_before_action :require_no_authentication, only: [ :new, :create ]
 
 
   # GET /resource/sign_up
@@ -17,7 +17,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     if @user.save
       sign_in(@user)
-      redirect_to dashboard_path, notice: 'Welcome! You have signed up successfully.'
+      redirect_to dashboard_path, notice: "Welcome! You have signed up successfully."
     else
       # If registration fails, render the sign-up page with errors
       render :new
