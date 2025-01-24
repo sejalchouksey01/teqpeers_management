@@ -51,16 +51,17 @@
                 
                 <!-- Feedback Column -->
                 <td class="align-middle">
-                  <%= button_to bi_weekly_feedback_path(user_id: user.id), 
-                      method: :get, 
-                      class: "btn btn-sm btn-outline-success d-flex align-items-center gap-2" do %>
-                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h11M9 21v-3M5 18l4 4 4-4M16 3h5v5m0 0l-6-6m6 6L10 15"/>
-                    </svg>
-                    Feedback
-                  <% end %>
+                  <%if user.trainee?%>
+                    <%= button_to bi_weekly_feedback_path(user_id: user.id), 
+                        method: :get, 
+                        class: "btn btn-sm btn-outline-success d-flex align-items-center gap-2" do %>
+                      <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h11M9 21v-3M5 18l4 4 4-4M16 3h5v5m0 0l-6-6m6 6L10 15"/>
+                      </svg>
+                      Feedback
+                    <% end %>
+                  <%end%>
                 </td>
-
 
                 <!-- Actions Column -->
                 <td class="text-center align-middle">

@@ -40,7 +40,6 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    binding.pry
     @user = User.find(params[:id])
     if @user.destroy
       redirect_to portal_users_path
